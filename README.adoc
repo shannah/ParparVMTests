@@ -1,0 +1,27 @@
+= ParparVM Tests
+
+This project contains unit tests for https://www.codenameone.com[CodenameOne's] ParparVM, an ahead-of-time Java compiler and virtual machine for iOS.
+
+== Installation
+
+[source,bash]
+----
+git clone https://github.com/shannah/ParparVMTests
+cd ParparVMTests
+sh setup.sh
+----
+
+== Running Tests
+
+1. Open the project in NetBeans
+2. Build the project for iOS
+3. Install/Open the resulting App.
+4. Press the "Run Tests" button in the app.
+
+== Author
+
+https://sjhannah.com[Steve Hannah]
+
+== More Information
+
+. https://www.codenameone.com[The Codename One Website]
