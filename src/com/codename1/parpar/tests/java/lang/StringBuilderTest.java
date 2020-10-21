@@ -209,7 +209,7 @@ public class StringBuilderTest extends AbstractTest {
         int eIndex = sb.toString().indexOf("E");
         assertTrue(eIndex>0);
         assertEqual("E-25", sb.toString().substring(eIndex));
-        assertTrue(sb.toString().startsWith("1.234"));
+        assertTrue(sb.toString().startsWith("1.234") || sb.toString().startsWith("1.2339"));
         //assertEqual("1.234E-25", sb.toString());
     }
 
@@ -220,7 +220,7 @@ public class StringBuilderTest extends AbstractTest {
         int eIndex = sb.toString().indexOf("E");
         assertTrue(eIndex>0);
         assertEqual("E-30", sb.toString().substring(eIndex));
-        assertTrue(sb.toString().startsWith("9.8764"));
+        assertTrue(sb.toString().startsWith("9.8764") || sb.toString().startsWith("9.876399"));
         //assertEqual("9.8764E-30", sb.toString());
     }
 

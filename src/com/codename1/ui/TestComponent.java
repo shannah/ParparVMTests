@@ -59,7 +59,10 @@ public class TestComponent extends AbstractTest {
         List_shouldRenderSelection();
         
         testCookies();
-        testCookiesInBrowserComponent();
+        
+        // Disabling this test right now because it is broken in WKWebView and CEF
+        // See https://github.com/codenameone/CodenameOne/issues/3291
+        //testCookiesInBrowserComponent();
         
         testBrowserComponent2267();
         findCommandComponent();

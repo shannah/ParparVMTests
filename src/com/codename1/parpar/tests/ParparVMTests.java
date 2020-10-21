@@ -15,6 +15,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
 import com.codename1.testing.TestRunnerComponent;
 import com.codename1.parpar.tests.java.lang.*;
+import com.codename1.parpar.tests.java.util.*;
 import com.codename1.parpar.tests.core.*;
 import com.codename1.ui.TestComponent;
 import com.codename1.ui.*;
@@ -62,6 +63,7 @@ public class ParparVMTests {
         }
         TestRunnerComponent r = new TestRunnerComponent();
         r.add(new BooleanTest(),
+                //java.lang
                 new CharacterTest(),
                 new ClassTest(),
                 new DoubleTest(),
@@ -76,6 +78,16 @@ public class ParparVMTests {
                 new ThreadTest(),
                 new ThrowableTest(),
                 new ThrowCatchTest(),
+                // java.util
+                new ArrayDequeTest(),
+                new ArrayListTest(),
+                new ArraysTest(),
+                new BitSetTest(),
+                new CollectionsTest(),
+                new DateTest(),
+                new HashtableTest(),
+                
+                // Codename One core 
                 new AddToQueueAndWaitOffEDTDeadlockTest(),
                 new ByteCodeLevelTests(),
                 new DatabaseTests(),
