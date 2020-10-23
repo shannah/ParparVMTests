@@ -90,6 +90,23 @@ public class ThrowCatchTest extends AbstractTest {
         } finally {
             thread.kill();
         }
+        TestNested nested = new TestNested();
+        
+        nested.nestedSynchronized();
+        Throwable error = null;
+        try {
+            nested.nestedSynchronizedThrows();
+        } catch (RuntimeException ex) {
+            error = ex;
+        }
+        assertTrue(error instanceof RuntimeException);
+        error  = null;
+        try {
+            nested.nestedSynchronizedThrows2();
+        } catch (RuntimeException ex) {
+            error = ex;
+        }
+        assertTrue(error instanceof RuntimeException);
         
         return true;
     }
@@ -219,5 +236,52 @@ public class ThrowCatchTest extends AbstractTest {
         throw new Exception();
     }
     
+    
+    private class TestNested {
+        final ArrayList lock = new ArrayList();
+        {
+            lock.add("Foo");
+            lock.add("Bar");
+        }
+        
+        synchronized void nestedSynchronized() {
+            ArrayList tmp;
+            synchronized(lock) {
+                tmp = new ArrayList(lock);
+            }
+            
+            for (Object item : tmp) {
+                System.out.println("item");
+            }
+        }
+        
+        synchronized void nestedSynchronizedThrows() {
+            ArrayList tmp;
+            synchronized(lock) {
+                tmp = new ArrayList(lock);
+                if (true) {
+                    throw new RuntimeException();
+                }
+            }
+            
+            for (Object item : tmp) {
+                System.out.println("item");
+            }
+        }
+        
+        synchronized void nestedSynchronizedThrows2() {
+            ArrayList tmp;
+            synchronized(lock) {
+                tmp = new ArrayList(lock);
+                
+            }
+            if (true) {
+                throw new RuntimeException();
+            }
+            for (Object item : tmp) {
+                System.out.println("item");
+            }
+        }
+    }
     
 }
