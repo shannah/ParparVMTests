@@ -22,6 +22,7 @@ public class DoubleTest extends AbstractTest {
     
     @Override
     public boolean runTest() throws Exception {
+        parseDouble3250Test();
         parsed();
         compares();
         //hexStringBuilt();
@@ -31,6 +32,14 @@ public class DoubleTest extends AbstractTest {
         return true;
     }
     
+    
+    public void parseDouble3250Test() {
+        String test1 = "1.000000108001807564";
+        String test2 = "1.0000001080018075648";
+        assertTrue(Math.abs(Double.parseDouble(test1) - 1.000000108001807564) < 0.0001);
+        assertTrue(Math.abs(Double.parseDouble(test2) - 1.0000001080018075648) < 0.0001);
+        
+    }
     
     public void parsed() {
         assertEqual(23, Double.parseDouble("23"), 1E-12);
