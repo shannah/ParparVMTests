@@ -18,6 +18,34 @@ sh setup.sh
 3. Install/Open the resulting App.
 4. Press the "Run Tests" button in the app.
 
+== Adding Tests
+
+. Create a new class which extends `AbstractTest`.  This can be named anything you like, and it can be in any package you like.
+.. Implement the `toString()` method to return the test name.
+.. Implement the `runTest()` method to actually run the test.  Generally I implement many other private methods to run individual tests, and just call them from the `runTest()` method.
+.. If this test should run on the EDT, then implement the `shouldExecuteOnEDT()` method to return `true`.
+. Add an instance of your class to the TestRunner in the https://github.com/shannah/ParparVMTests/blob/master/src/com/codename1/parpar/tests/ParparVMTests.java[ParparVMTests] class:
++
+[source,java]
+----
+TestRunnerComponent r = new TestRunnerComponent();
+        r.add(new BooleanTest(),
+                //java.lang
+                new CharacterTest(),
+                new ClassTest(),
+                new DoubleTest(),
+                new EnumTest(),
+                new FloatTest(),
+                new IntegerTest(),
+				//... etc...
+				new MyTest()
+---- 
+. Build and run the test runner to ensure that your test works.
+
+You can refer to any of the existing tests as reference.  E.g. https://github.com/shannah/ParparVMTests/blob/master/src/com/codename1/parpar/tests/java/lang/BooleanTest.java[BooleanTest], https://github.com/shannah/ParparVMTests/blob/master/src/com/codename1/ui/TestPicker.java[TestPicker], etc..
+
+Once you have a working test, send a pull request to this repo with your test.
+
 == Author
 
 https://sjhannah.com[Steve Hannah]
