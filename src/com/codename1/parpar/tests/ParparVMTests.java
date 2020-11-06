@@ -1,6 +1,7 @@
 package com.codename1.parpar.tests;
 
 
+import com.codename1.components.SplitPaneTest;
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
@@ -106,7 +107,8 @@ public class ParparVMTests {
                 new GeneralPathTest(),
                 new GeneralPathTest2(),
                 new AsyncResourceTests(),
-                new StringUtilTests()
+                new StringUtilTests(),
+                new SplitPaneTest()
         
         );
         r.showForm();
