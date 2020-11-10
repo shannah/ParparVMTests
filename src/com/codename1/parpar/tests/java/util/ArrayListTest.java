@@ -32,7 +32,40 @@ public class ArrayListTest extends AbstractTest {
         manyElementsRemoved();
         //removeIf();
         subListRange();
+        toArrayTest();
         return true;
+    }
+    
+    private void toArrayTest() {
+        ArrayList<String> l = new ArrayList<String>();
+        l.add("Red");
+        l.add("Green");
+        l.add("Blue");
+        String[] arr = l.toArray(new String[0]);
+        assertEqual(l.size(), arr.length);
+        for (int i=0; i < arr.length; i++) {
+            assertEqual(l.get(i), arr[i]);
+        }
+        
+
+        arr = l.toArray(new String[l.size()]);
+        assertEqual(l.size(), arr.length);
+        for (int i=0; i < arr.length; i++) {
+            assertEqual(l.get(i), arr[i]);
+        }
+        
+        arr = l.toArray(new String[l.size()-1]);
+        assertEqual(l.size(), arr.length);
+        for (int i=0; i < arr.length; i++) {
+            assertEqual(l.get(i), arr[i]);
+        }
+        
+        arr = l.toArray(new String[l.size()-2]);
+        assertEqual(l.size(), arr.length);
+        for (int i=0; i < arr.length; i++) {
+            assertEqual(l.get(i), arr[i]);
+        }
+        
     }
     
     
