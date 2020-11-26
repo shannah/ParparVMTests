@@ -29,6 +29,7 @@ public class DoubleTest extends AbstractTest {
         longBitsExtracted();
         longBitsPacked();
         parsedWithError();
+        equals();
         return true;
     }
     
@@ -112,6 +113,18 @@ public class DoubleTest extends AbstractTest {
         assertTrue(Double.compare(10, 5) > 0);
         assertTrue(Double.compare(5, 10) < 0);
         assertTrue(Double.compare(5, 5) == 0);
+    }
+    
+    public void equals() {
+        assertEqual(Double.valueOf(Double.NaN), Double.valueOf(Double.NaN));
+        assertEqual(Double.valueOf(Double.POSITIVE_INFINITY), Double.valueOf(Double.POSITIVE_INFINITY));
+        assertNotEqual(Double.valueOf(Double.POSITIVE_INFINITY), Double.valueOf(Double.NEGATIVE_INFINITY));
+        assertNotEqual(Double.valueOf(Double.NaN), Double.valueOf(Double.POSITIVE_INFINITY));
+        assertEqual(Double.valueOf(10.0), Double.valueOf(10.0));
+        assertNotEqual(Double.valueOf(10.0), Double.valueOf(10.1));
+        assertTrue(0.0==-0.0, "0.0 should be equal to -0.0");
+        assertFalse(Double.doubleToLongBits(0.0) == Double.doubleToLongBits(-0.0), "Double.doubleToLongBits(0.0) should be different than Double.double.toLongBits(-0.0)");
+        assertFalse(Double.valueOf(0.0).equals(Double.valueOf(-0.0)), "Double(0.0) should NOT be equal to Double(-0.0)");
     }
     
 }
