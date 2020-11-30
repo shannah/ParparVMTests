@@ -33,6 +33,7 @@ public class CollectionsTest extends AbstractTest {
         replaces();
         rotates();
         shuffleWorksOnArrayAsList();
+        reverse();
         return true;
     }
     
@@ -145,6 +146,23 @@ public class CollectionsTest extends AbstractTest {
     
     void assertTrue(String message, boolean val) {
         assertTrue(val, message);
+    }
+    
+    public void reverse() {
+        long[] arr = new long[]{1L, Long.MIN_VALUE, Long.MAX_VALUE};
+        
+        List<Long> list = new ArrayList<Long>();
+        for (int i=0; i<arr.length; i++) {
+            list.add(arr[i]);
+        }
+        Collections.reverse(list);
+        assertEqual(Long.MAX_VALUE, (long)list.get(0));
+        assertEqual(Long.valueOf(Long.MAX_VALUE), list.get(0));
+        assertEqual(Long.MIN_VALUE, (long)list.get(1));
+        assertEqual(Long.valueOf(Long.MIN_VALUE), list.get(1));
+        assertEqual(1L, (long)list.get(2));
+        assertEqual(Long.valueOf(1L), list.get(2));
+        
     }
     
 }

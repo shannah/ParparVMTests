@@ -30,6 +30,8 @@ public class DoubleTest extends AbstractTest {
         longBitsPacked();
         parsedWithError();
         equals();
+        lessThan();
+        isSame();
         return true;
     }
     
@@ -125,6 +127,78 @@ public class DoubleTest extends AbstractTest {
         assertTrue(0.0==-0.0, "0.0 should be equal to -0.0");
         assertFalse(Double.doubleToLongBits(0.0) == Double.doubleToLongBits(-0.0), "Double.doubleToLongBits(0.0) should be different than Double.double.toLongBits(-0.0)");
         assertFalse(Double.valueOf(0.0).equals(Double.valueOf(-0.0)), "Double(0.0) should NOT be equal to Double(-0.0)");
+    }
+    
+    public void lessThan() {
+        assertTrue(lessThan(-0.0, 0.0));
+        assertTrue(!lessThan(0.0, -0.0));
+        assertTrue(lessThan(Double.POSITIVE_INFINITY, Double.NaN));
+        assertTrue(!lessThan(Double.NaN, Double.POSITIVE_INFINITY));
+        assertTrue(!lessThan(Double.NaN, Double.NaN));
+        assertTrue(!lessThan(0.0, 0.0));
+        assertTrue(!lessThan(-0.0, -0.0));
+        
+    }
+    
+    /**
+     * Extracted this private method from Arrays.java in ParparVM JavaAPI to test algorithm without having
+     * to build on iOS.  Used for sorting double arrays, and needs to behave like Double.compare(double, double)
+     * @param double1
+     * @param double2
+     * @return 
+     */
+    private static boolean lessThan(double double1, double double2) {
+        // A slightly specialized version of
+        // Double.compare(double1, double2) < 0.
+
+        // Non-zero and non-NaN checking.
+
+        // NaNs are equal to other NaNs and larger than any other double.
+        if (Double.isNaN(double1)) {
+            return false;
+        } else if (Double.isNaN(double2)) {
+            return true;
+        }
+        
+        if (double1 == 0d && double1 == double2) {
+            long bits1 = Double.doubleToLongBits(double1);
+            long bits2 = Double.doubleToLongBits(double2);
+            long neg0 = Double.doubleToLongBits(-0.0);
+            return bits1 != bits2 && bits1 == neg0;
+        }
+
+        // Deal with +0.0 and -0.0.
+        //long d1 = Double.doubleToRawLongBits(double1);
+        //long d2 = Double.doubleToRawLongBits(double2);
+        return double1 < double2;
+    }
+    
+    /**
+     * Extracted this private method from Arrays.java in ParparVM JavaAPI to test algorithm without having
+     * to build on iOS.  Used for sorting double arrays, and needs to behave like Double.equals(double, double)
+     */
+    private void isSame() {
+        assertFalse(isSame(-0.0, 0.0));
+        assertFalse(isSame(0.0, -0.0));
+        assertFalse(isSame(Double.POSITIVE_INFINITY, Double.NaN));
+        assertFalse(isSame(Double.NaN, Double.POSITIVE_INFINITY));
+        assertTrue(isSame(Double.NaN, Double.NaN));
+        assertTrue(isSame(0.0, 0.0));
+        assertTrue(isSame(-0.0, -0.0));
+    }
+    
+    private static boolean isSame(double double1, double double2) {
+        
+        if (Double.isNaN(double1)) {
+            return Double.isNaN(double2);
+        }
+        if (Double.isNaN(double2)) {
+            return false;
+        }
+        long d1 = Double.doubleToLongBits(double1);
+        long d2 = Double.doubleToLongBits(double2);
+        return d1 == d2;
+
     }
     
 }

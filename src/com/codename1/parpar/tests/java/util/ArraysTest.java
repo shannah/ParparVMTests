@@ -27,6 +27,10 @@ public class ArraysTest extends AbstractTest {
         arrayExposedAsString();
         arraySorted();
         binarySearchWorks();
+        sortLong();
+        sortBoxedLong();
+        copyOfLong();
+        
         return true;
     }
     
@@ -69,10 +73,33 @@ public class ArraysTest extends AbstractTest {
         assertEqual("[1, 2, null, [...], foo]", Arrays.deepToString(array));
     }
 
+    
+    public void sortLong() {
+        long[] arr = new long[]{1L, Long.MIN_VALUE, Long.MAX_VALUE};
+        Arrays.sort(arr);
+        assertEqual(1L, arr[1]);
+        assertEqual(Long.MIN_VALUE, arr[0]);
+        assertEqual(Long.MAX_VALUE, arr[2]);
+    }
+    
+    public void copyOfLong() {
+        long[] arr = new long[]{1L, Long.MIN_VALUE, Long.MAX_VALUE};
+        long[] copy = Arrays.copyOf(arr, arr.length);
+        assertEqual(arr.length, copy.length);
+        for (int i=0; i<arr.length; i++) {
+            assertEqual(arr[i], copy[i]);
+        }
+    }
+    
+    public void sortBoxedLong() {
+        Object[] arr = new Object[]{1L, Long.MIN_VALUE, Long.MAX_VALUE};
+        Arrays.sort(arr);
+        assertEqual(1L, arr[1]);
+        assertEqual(Long.MIN_VALUE, arr[0]);
+        assertEqual(Long.MAX_VALUE, arr[2]);
+    }
   
 
-    
-    
     
     
     
